@@ -3,3 +3,4 @@ cifar**
 **.pt
 normalized_center_data/
 wandb/
+**.zip
