@@ -1,6 +1,0 @@
-Files already downloaded and verified
-Files already downloaded and verified
-Epoch: 1 | train_loss: 0.4360 | train_acc: 0.8538 | test_loss: 0.3373 | test_acc: 0.8868 | train_epoch_time: 258.0335 | test_epoch_time: 18.0959
-Epoch: 2 | train_loss: 0.2542 | train_acc: 0.9133 | test_loss: 0.3810 | test_acc: 0.8716 | train_epoch_time: 258.1033 | test_epoch_time: 18.0007
-Epoch: 3 | train_loss: 0.2082 | train_acc: 0.9285 | test_loss: 0.3126 | test_acc: 0.8974 | train_epoch_time: 258.1366 | test_epoch_time: 17.9915
-Test accuracy: 0.8974485759493671
