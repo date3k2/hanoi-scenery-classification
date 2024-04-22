@@ -326,13 +326,13 @@ def test(model, dataloader):
 config = dict(
     epochs=5,
     classes=10,
-    learning_rate=2.5e-3,
+    learning_rate=2e-3,
     batch_size=BATCH_SIZE,
     image_size=IMAGE_SIZE,
     num_workers=os.cpu_count(),
-    weight_decay=1e-4,
+    weight_decay=0.005,
 )
-wandb.init(project="new-sota-model", name="dat-test-resnet50-v3", config=config)
+wandb.init(project="new-sota-model", name="dat-test-resnet50-v4", config=config)
 
 
 model, transforms = create_model(num_classes=config["classes"])
@@ -341,11 +341,17 @@ compiled_model = torch.compile(model)
 train_dataloader, test_dataloader = get_train_test_dataloader(
     transforms, config["batch_size"], config["num_workers"]
 )
-optimizer = torch.optim.Adam(
+# optimizer = torch.optim.Adam(
+#     model.parameters(),
+#     lr=config["learning_rate"],
+#     weight_decay=config["weight_decay"],
+#     amsgrad=True,
+# )
+optimizer = torch.optim.SGD(
     model.parameters(),
     lr=config["learning_rate"],
     weight_decay=config["weight_decay"],
-    amsgrad=True,
+    momentum=0.65,
 )
 loss_fn = torch.nn.CrossEntropyLoss()
 train(
@@ -358,9 +364,7 @@ train(
     device=device,
 )
 torch.save(
-    {
-        "model_state_dict": model.state_dict(),
-        "optimizer_state_dict": optimizer.state_dict(),
-    },
-    f"compile_model_v3.pt",
-)
+{"model_state_dict": model.state_dict(),
+"optimizer_state_dict": optimizer.state_dict(),
+},
+f"compile_model_v4.pt")
